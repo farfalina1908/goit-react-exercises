@@ -1,0 +1,24 @@
+.title__name {
+   background-color: black;
+   color: white;
+}
+
+.titleName {
+   background-color: blue;
+   color: yellow;
+}
+
+.titleName.module {
+   background-color: yellow;
+   color: blue;
+}
+
+.titleName.online {
+   background-color: red;
+   color: white;
+}
+
+.titleName.offline {
+   background-color: greenyellow;
+   color: orange;
+}
