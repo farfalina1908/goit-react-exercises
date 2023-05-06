@@ -5,6 +5,7 @@ import ToDoList from "./ToDoList/ToDoList"
 import Modal from "./Modal/Modal"
 import { Component } from "react"
 import Parent from "./Parent/Parent";
+import FormLogin from "./FormLogin/FormLogin"
 
 // -------------- Exersise 1 Card --------------
 
@@ -25,18 +26,14 @@ class App extends Component {
       this.setState({ isShowModal: false });
    };
 
-   // render() {
-   //    return (
-   //       <div className="Container">
-   //          <Header open={this.openModal} />
-   //          {/* <Counter /> */}
-   //          {/* <ToDoList /> */}
-   //          {this.state.isShowModal && (
-   //             <Modal close={this.closeModal}> some</Modal>
-   //          )}
-   //       </div>
-   //    )
-   // }
+   createUser = (data) => {
+      const newUser = {
+         ...data,
+         id: Date.now(),
+         role: 'customer'
+      }
+      console.log("newUser:", newUser);
+    }
 
    render() {
       return (
@@ -44,16 +41,30 @@ class App extends Component {
             <Header open={this.openModal} />
             {/* <Counter /> */}
             <ToDoList />
+            {this.state.isShowModal && (
+               <Modal close={this.closeModal}> <FormLogin createUser={ this.createUser} /></Modal>
+            )}
             
-               <Parent
-                  close={this.closeModal}
-                  isOpen={this.state.isShowModal}>
-                  some
-               </Parent>
-           
          </div>
       );
    }
+
+   // render() {
+   //    return (
+   //       <div className="Container">
+   //          <Header open={this.openModal} />
+   //          {/* <Counter /> */}
+   //          <ToDoList />
+            
+   //          <Parent
+   //                close={this.closeModal}
+   //                isOpen={this.state.isShowModal}>
+   //                some
+   //          </Parent>
+                       
+   //       </div>
+   //    );
+   // }
 }
 
 export default App
