@@ -4,7 +4,7 @@ import Counter from "./Counter/Counter"
 import ToDoList from "./ToDoList/ToDoList"
 import Modal from "./Modal/Modal"
 import { Component } from "react"
-import Parent from "./Parent/Parent";
+import Parent from "./Parent/Parent"
 import FormLogin from "./FormLogin/FormLogin"
 
 // -------------- Exersise 1 Card --------------
@@ -16,24 +16,24 @@ import FormLogin from "./FormLogin/FormLogin"
 // --------- Exersise 2 -----------------------
 
 class App extends Component {
-   state = { isShowModal: false };
+   state = { isShowModal: false }
 
    openModal = () => {
-      this.setState({ isShowModal: true });
-   };
+      this.setState({ isShowModal: true })
+   }
 
    closeModal = () => {
-      this.setState({ isShowModal: false });
-   };
+      this.setState({ isShowModal: false })
+   }
 
    createUser = (data) => {
       const newUser = {
          ...data,
          id: Date.now(),
-         role: 'customer'
+         role: "customer",
       }
-      console.log("newUser:", newUser);
-    }
+      console.log("newUser:", newUser)
+   }
 
    render() {
       return (
@@ -42,11 +42,15 @@ class App extends Component {
             {/* <Counter /> */}
             <ToDoList />
             {this.state.isShowModal && (
-               <Modal close={this.closeModal}> <FormLogin createUser={ this.createUser} /></Modal>
+               <Modal close={this.closeModal}>
+                  <FormLogin
+                     close={this.closeModal}
+                     createUser={this.createUser}
+                  />
+               </Modal>
             )}
-            
          </div>
-      );
+      )
    }
 
    // render() {
@@ -55,13 +59,13 @@ class App extends Component {
    //          <Header open={this.openModal} />
    //          {/* <Counter /> */}
    //          <ToDoList />
-            
+
    //          <Parent
    //                close={this.closeModal}
    //                isOpen={this.state.isShowModal}>
    //                some
    //          </Parent>
-                       
+
    //       </div>
    //    );
    // }

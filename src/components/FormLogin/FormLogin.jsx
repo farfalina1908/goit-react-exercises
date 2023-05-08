@@ -1,30 +1,43 @@
-import { Component } from "react";
+import { Component } from "react"
 
 class FormLogin extends Component {
    state = {
       email: "",
       password: "",
-   };
+      isChecked: false,
+   }
 
    handleChange = ({ target: { value, name } }) => {
       this.setState({
          [name]: value,
-      });
-   };
+      })
+   }
 
    validator = ({ target: { value, name } }) => {
       if (name === "password") {
-         !value.includes("!") && alert('Password must include "!"');
+         !value.includes("!") && alert('Password must include "!"')
       }
-   };
+   }
 
-    handleSubmit = (e) => { 
-        e.preventDefault();
-        this.props.createUser ({ 
-            email: this.state.email,
-            userpassword: this.state.password,
-        })
-    }
+   handleSubmit = (e) => {
+      e.preventDefault()
+      this.props.createUser({
+         email: this.state.email,
+         userpassword: this.state.password,
+      })
+      // this.props.close()
+      this.setState({
+         email: "",
+         password: "",
+         isChecked: false,
+      })
+   }
+
+   handleCheck = ({ target: { checked } }) => {
+      this.setState({
+         isChecked: checked,
+      })
+   }
 
    render() {
       return (
@@ -66,21 +79,27 @@ class FormLogin extends Component {
                   type="checkbox"
                   className="form-check-input"
                   id="exampleCheck1"
+                  checked={this.state.isChecked}
+                  onChange={this.handleCheck}
                />
                <label className="form-check-label" for="exampleCheck1">
-                  Check me out
+                  I agree
                </label>
             </div>
             <button
                type="submit"
                className="btn btn-primary"
-               disabled={!this.state.email || !this.state.password}
+               disabled={
+                  !this.state.email ||
+                  !this.state.password ||
+                  !this.state.isChecked
+               }
             >
                Submit
             </button>
          </form>
-      );
+      )
    }
 }
- 
-export default FormLogin;
+
+export default FormLogin
