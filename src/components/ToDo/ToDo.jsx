@@ -1,9 +1,9 @@
-import React from "react";
+import React from "react"
 
-const ToDo = ({ todo, check }) => {
-    function handleCheck() { 
-        check(todo.id);
-    }
+const ToDo = ({ todo, check, handleDelete }) => {
+   function handleCheck() {
+      check(todo.id)
+   }
    return (
       <li className="list-group-item">
          <div className="row justify-content-between">
@@ -21,11 +21,12 @@ const ToDo = ({ todo, check }) => {
                   type="button"
                   className="btn-close"
                   aria-label="Close"
+                  onClick={handleDelete}
                ></button>
             </div>
          </div>
       </li>
-   );
-};
+   )
+}
 
-export default ToDo;
+export default ToDo

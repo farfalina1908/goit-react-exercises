@@ -6,44 +6,55 @@ class FormLogin extends Component {
       password: "",
       isChecked: false,
       gender: "",
-   };
+   }
+
+   componentDidMount() {
+      console.log("Mount")
+   }
+
+   componentDidUpdate(prevProps, prevState) {
+      console.log("Update")
+   }
+
+   componentWillUnmount() {
+      console.log("Unmount")
+   }
 
    handleChange = ({ target: { value, name } }) => {
       this.setState({
          [name]: value,
-      });
-   };
+      })
+   }
 
    validator = ({ target: { value, name } }) => {
       if (name === "password") {
-         !value.includes("!") && alert('Password must include "!"');
+         !value.includes("!") && alert('Password must include "!"')
       }
-   };
+   }
 
    handleSubmit = (e) => {
-      e.preventDefault();
+      e.preventDefault()
       this.props.createUser({
          email: this.state.email,
          userpassword: this.state.password,
-      });
+      })
       // this.props.close()
       this.setState({
          email: "",
          password: "",
          isChecked: false,
-      });
-   };
+      })
+   }
 
    handleCheck = ({ target: { checked } }) => {
       this.setState({
          isChecked: checked,
-      });
-   };
+      })
+   }
 
-   handleGender = ({ target: { name} }) => {
-      this.setState({ gender:name}) 
-}
-    
+   handleGender = ({ target: { name } }) => {
+      this.setState({ gender: name })
+   }
 
    render() {
       return (
@@ -143,7 +154,7 @@ class FormLogin extends Component {
                Submit
             </button>
          </form>
-      );
+      )
    }
 }
 
