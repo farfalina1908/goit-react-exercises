@@ -1,13 +1,39 @@
 import { Component } from "react"
 import ToDo from "../ToDo/ToDo"
-import todo from "../../todo.json"
+// import todo from "../../todo.json"
 import { nanoid } from "nanoid"
 
 class ToDoList extends Component {
    state = {
-      todoList: todo,
+      todoList: [],
       nameTodo: "",
       isCreated: false,
+      isDeleted: false,
+   }
+
+   componentDidMount() {
+      const localData = localStorage.getItem("todo")
+      if (localData) {
+         this.setState({ todoList: JSON.parse(localData) })
+      }
+   }
+
+   componentDidUpdate(prevProps, prevState) {
+      if (prevState.todoList.length !== this.state.todoList.length) {
+         localStorage.setItem("todo", JSON.stringify(this.state.todoList))
+      }
+      if (this.state.todoList.length > prevState.todoList.length) {
+         this.setState({ isCreated: true })
+         setTimeout(() => {
+            this.setState({ isCreated: false })
+         }, 1500)
+      }
+      if (this.state.todoList.length < prevState.todoList.length) {
+         this.setState({ isDeleted: true })
+         setTimeout(() => {
+            this.setState({ isDeleted: false })
+         }, 1500)
+      }
    }
 
    handleCheck = (id) => {
@@ -18,15 +44,6 @@ class ToDoList extends Component {
             ),
          }
       })
-   }
-
-   componentDidUpdate(prevProps, prevState) {
-      if (this.state.todoList.length > prevState.todoList.length) {
-         this.setState({ isCreated: true })
-         setTimeout(() => {
-            this.setState({ isCreated: false })
-         }, 1500)
-      }
    }
 
    handleChange = ({ target }) => {
@@ -58,40 +75,47 @@ class ToDoList extends Component {
 
    render() {
       return (
-         <>
-            {this.state.isCreated && (
-               <div class="alert alert-primary" role="alert">
-                  Created To-Do successfully!
-               </div>
-            )}
-            <form onSubmit={this.handleSubmit}>
-               <div className="mb-3">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
-                     To-Do Name
-                  </label>
-                  <input
-                     name="nameTodo"
-                     type="text"
-                     className="form-control"
-                     id="exampleInputEmail1"
-                     aria-describedby="emailHelp"
-                     onChange={this.handleChange}
-                     value={this.state.nameTodo}
-                  />
-               </div>
-            </form>
-            <h1>My To-Do list</h1>
-            <ul className="list-group list-group-flush">
-               {this.state.todoList.map((todo) => (
-                  <ToDo
-                     handleDelete={() => this.handleDelete(todo.id)}
-                     check={this.handleCheck}
-                     key={todo.id}
-                     todo={todo}
-                  />
-               ))}
-            </ul>
-         </>
+         this.state.todoList && (
+            <>
+               {this.state.isCreated && (
+                  <div className="alert alert-primary" role="alert">
+                     Created To-Do successfully!
+                  </div>
+               )}
+               {this.state.isDeleted && (
+                  <div className="alert alert-danger" role="alert">
+                     Deleted To-Do successfully!
+                  </div>
+               )}
+               <form onSubmit={this.handleSubmit}>
+                  <div className="mb-3">
+                     <label htmlFor="exampleInputEmail1" className="form-label">
+                        To-Do Name
+                     </label>
+                     <input
+                        name="nameTodo"
+                        type="text"
+                        className="form-control"
+                        id="exampleInputEmail1"
+                        aria-describedby="emailHelp"
+                        onChange={this.handleChange}
+                        value={this.state.nameTodo}
+                     />
+                  </div>
+               </form>
+               <h1>My To-Do list</h1>
+               <ul className="list-group list-group-flush">
+                  {this.state.todoList.map((todo) => (
+                     <ToDo
+                        handleDelete={() => this.handleDelete(todo.id)}
+                        check={this.handleCheck}
+                        key={todo.id}
+                        todo={todo}
+                     />
+                  ))}
+               </ul>
+            </>
+         )
       )
    }
 }
