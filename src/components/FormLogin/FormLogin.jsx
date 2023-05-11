@@ -9,15 +9,15 @@ class FormLogin extends Component {
    }
 
    componentDidMount() {
-      console.log("Mount")
+      // console.log("Mount")
    }
 
    componentDidUpdate(prevProps, prevState) {
-      console.log("Update")
+      // console.log("Update")
    }
 
    componentWillUnmount() {
-      console.log("Unmount")
+      // console.log("Unmount")
    }
 
    handleChange = ({ target: { value, name } }) => {

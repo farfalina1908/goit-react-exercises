@@ -96,8 +96,8 @@ class ToDoList extends Component {
                         name="nameTodo"
                         type="text"
                         className="form-control"
-                        id="exampleInputEmail1"
-                        aria-describedby="emailHelp"
+                        id="exampleInputName"
+                        aria-describedby="nameHelp"
                         onChange={this.handleChange}
                         value={this.state.nameTodo}
                      />

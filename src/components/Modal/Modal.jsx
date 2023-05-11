@@ -1,22 +1,24 @@
 import { Component } from "react"
 
 class Modal extends Component {
-
-   componentDidMount() { 
-      document.addEventListener('keydown', handleESC)
+   componentDidMount() {
+      document.addEventListener("keydown", this.handleESC)
    }
 
-   componentWillUnmount() { }
+   componentWillUnmount() {
+      document.removeEventListener("keydown", this.handleESC)
+   }
 
-   handleESC = (e) => { 
-      if (e.code === 'Escape') { 
+   handleESC = (e) => {
+      console.log("esc")
+      if (e.code === "Escape") {
          this.props.close()
       }
    }
 
-   const { children, close} = this.props
-   state = {}
+   // state = {}
    render() {
+      const { children, close } = this.props
       return (
          <div
             className="modal fade show"

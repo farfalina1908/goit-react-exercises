@@ -39,8 +39,8 @@ class App extends Component {
       return (
          <div className="Container">
             <Header open={this.openModal} />
-            {/* <Counter /> */}
-            <ToDoList />
+            <Counter />
+            {/* <ToDoList /> */}
             {this.state.isShowModal && (
                <Modal close={this.closeModal}>
                   <FormLogin

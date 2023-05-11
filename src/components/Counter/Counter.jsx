@@ -1,4 +1,24 @@
-import { Component } from "react"
+import { Component, PureComponent } from "react"
+
+class Button extends PureComponent {
+   // shouldComponentUpdate(nextProps, nextState) {
+   //    if (nextProps.handleClickIncrement !== this.props.handleClickIncrement)
+   //       return true
+   //    return false
+   // }
+
+   render() {
+      console.log("render BTN")
+      return (
+         <button
+            onClick={this.props.handleClickIncrement}
+            className="btn btn-outline-success me-5"
+         >
+            <i className="bi bi-plus-circle fs-1"></i>
+         </button>
+      )
+   }
+}
 
 class Counter extends Component {
    state = { total: 0 }
@@ -14,6 +34,7 @@ class Counter extends Component {
       }))
 
    render() {
+      console.log("Render")
       return (
          <div className="position-absolute top-50 start-50 translate-middle">
             <div
@@ -30,13 +51,13 @@ class Counter extends Component {
                   </p>
 
                   <div className="d-flex justify-content-center px-5">
-                     <button
+                     {/* <button
                         onClick={this.handleClickIncrement}
                         className="btn btn-outline-success me-5"
                      >
                         <i className="bi bi-plus-circle fs-1"></i>
-                     </button>
-
+                     </button> */}
+                     <Button handleClickIncrement={this.handleClickIncrement} />
                      <button
                         onClick={this.handleClickDecrement}
                         className="btn  btn-outline-danger ms-5"
