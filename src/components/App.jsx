@@ -6,6 +6,8 @@ import Modal from "./Modal/Modal"
 import { Component } from "react"
 import Parent from "./Parent/Parent"
 import FormLogin from "./FormLogin/FormLogin"
+import ContentInfo from "./ContentInfo/ContentInfo"
+import Search from "./Search/Search"
 
 // -------------- Exersise 1 Card --------------
 
@@ -16,7 +18,10 @@ import FormLogin from "./FormLogin/FormLogin"
 // --------- Exersise 2 -----------------------
 
 class App extends Component {
-   state = { isShowModal: false }
+   state = {
+      isShowModal: false,
+      searchText: "",
+   }
 
    openModal = () => {
       this.setState({ isShowModal: true })
@@ -35,12 +40,19 @@ class App extends Component {
       console.log("newUser:", newUser)
    }
 
+   handleSearch = (searchText) => {
+      this.setState({ searchText })
+   }
+
    render() {
       return (
          <div className="Container">
             <Header open={this.openModal} />
-            <Counter />
+            {/* <Counter /> */}
             {/* <ToDoList /> */}
+            <Search handleSearch={this.handleSearch} />
+
+            <ContentInfo searchText={this.state.searchText} />
             {this.state.isShowModal && (
                <Modal close={this.closeModal}>
                   <FormLogin
