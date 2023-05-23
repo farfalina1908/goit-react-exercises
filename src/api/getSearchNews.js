@@ -6,9 +6,6 @@ export const getSearchNews = (text) => {
       headers: {
          "X-Api-Key": API_KEY,
       },
-   })
-      .then((res) => res.json())
-      // .then(console.log)
+   }).then((res) => res.json())
+   // .then(console.log)
 }
-
-
